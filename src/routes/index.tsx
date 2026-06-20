@@ -71,44 +71,21 @@ function HomePage() {
           </p>
         </div>
 
-        <section className="card-soft p-7 md:p-9 bg-gradient-to-br from-navy to-[oklch(0.32_0.05_245)] text-white">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            <Stat
-              icon={<Sun className="w-5 h-5" />}
-              label="Solar today"
-              value={`${s.pv_kwh.toFixed(1)}`}
-              unit="kWh"
-              accent="text-cta"
-            />
-            <Stat
-              icon={<Battery className="w-5 h-5" />}
-              label="Battery"
-              value={`${Math.round(s.battery_soc_pct_current)}`}
-              unit="%"
-              accent="text-sunshine"
-            />
-            <Stat
-              icon={<Zap className="w-5 h-5" />}
-              label="Used today"
-              value={`${s.consumption_kwh.toFixed(1)}`}
-              unit="kWh"
-              accent="text-white"
-            />
-            <Stat
-              icon={savedVsLast >= 0 ? <TrendingDown className="w-5 h-5" /> : <TrendingUp className="w-5 h-5" />}
-              label={savedVsLast >= 0 ? "Saved vs last month" : "vs last month"}
-              value={`€${Math.abs(savedVsLast).toFixed(2)}`}
-              unit={savedVsLast >= 0 ? "↓" : "↑"}
-              accent={savedVsLast >= 0 ? "text-grass" : "text-sunshine"}
-            />
-          </div>
+        <EnergyFlow snapshot={today.now} />
 
-          <div className="mt-7 pt-6 border-t border-white/10 flex flex-wrap gap-x-8 gap-y-2 text-sm">
-            <Mini label="Self-sufficiency" value={`${s.self_sufficiency_pct}%`} />
-            <Mini label="Exported to grid" value={`${s.grid_export_kwh.toFixed(1)} kWh`} />
-            <Mini label="Bought from grid" value={`${s.grid_import_kwh.toFixed(1)} kWh`} />
-            <Mini label={`${monthLabel} bill so far`} value={`€${thisMonth?.total_bill_eur.toFixed(2) ?? "—"}`} />
-          </div>
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <Chip label="Solar today" value={`${s.pv_kwh.toFixed(1)} kWh`} tone="grass" />
+          <Chip label="Used today" value={`${s.consumption_kwh.toFixed(1)} kWh`} />
+          <Chip label="Self-sufficient" value={`${s.self_sufficiency_pct}%`} tone="grass" />
+          <Chip
+            label={savedVsLast >= 0 ? "Saved vs last mo." : "vs last month"}
+            value={`${savedVsLast >= 0 ? "↓" : "↑"} €${Math.abs(savedVsLast).toFixed(2)}`}
+            tone={savedVsLast >= 0 ? "grass" : "stone"}
+          />
+          <Chip label="Exported to grid" value={`${s.grid_export_kwh.toFixed(1)} kWh`} />
+          <Chip label="Bought from grid" value={`${s.grid_import_kwh.toFixed(1)} kWh`} />
+          <Chip label={`${monthLabel} bill so far`} value={`€${thisMonth?.total_bill_eur.toFixed(2) ?? "—"}`} />
+          <Chip label="Cheapest 3h today" value={`${today.cheapest_3h_window.start_hour}:00–${today.cheapest_3h_window.end_hour}:00`} tone="cta" />
         </section>
 
         {featured && (
