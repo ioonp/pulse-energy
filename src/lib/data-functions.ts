@@ -16,7 +16,7 @@ import { listHouseholds } from "./data-loader.server";
 const householdInput = z.object({ householdId: z.string() });
 
 function origin() {
-  return getRequestURL().origin;
+  return getRequestUrl().origin;
 }
 
 export const listHouseholdsFn = createServerFn({ method: "GET" }).handler(async () => {
