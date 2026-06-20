@@ -68,11 +68,27 @@ export type DailySummary = {
   battery_soc_pct_current: number;
 };
 
+export type LiveSnapshot = {
+  timestamp: string;
+  pv_kw: number;
+  house_load_kw: number;
+  heatpump_kw: number;
+  ev_kw: number;
+  battery_charge_kw: number;
+  battery_discharge_kw: number;
+  battery_soc_pct: number;
+  grid_import_kw: number;
+  grid_export_kw: number;
+  price_eur_per_kwh: number;
+  outdoor_temp_c: number;
+};
+
 export type TodayView = {
   date: string;
   summary: DailySummary;
   hourly: HourlyAggregate[];
   cheapest_3h_window: { start_hour: number; end_hour: number; avg_price_eur_per_kwh: number };
+  now: LiveSnapshot;
 };
 
 function aggregateHourly(records: TimeseriesRecord[]): HourlyAggregate[] {
