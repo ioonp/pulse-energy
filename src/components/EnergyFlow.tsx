@@ -208,7 +208,7 @@ export function EnergyFlow({ snapshot }: { snapshot: EnergyFlowSnapshot }) {
       </div>
 
       <div className="relative w-full">
-        <svg viewBox="0 0 720 460" className="w-full h-auto block" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 720 500" className="w-full h-auto block" preserveAspectRatio="xMidYMid meet">
           {/* CONNECTORS */}
           {/* Solar (top center) -> House */}
           <Flow d={`M ${cx} 110 Q ${cx} 170 ${cx} ${cy - 38}`} active={pvOn} produce magnitude={s.pv_kw} />
