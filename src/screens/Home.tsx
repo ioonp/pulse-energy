@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import type { Dataset } from "../lib/data";
 import { buildHome } from "../lib/views";
-import { DEMO_NOW_HOUR } from "../lib/demo";
 import { useGoals } from "../store/goals";
 import { eur } from "../lib/format";
 
@@ -32,13 +31,10 @@ export function Home({
 
   return (
     <div className="screen screen-pad-top">
-      <div className="greeting">Hi, the Beckers</div>
+      <div className="greeting">Hi, Becker family</div>
       <div className="muted tiny" style={{ marginTop: 4 }}>
         {hh.city} · {hh.pv_kwp} kW solar · {hh.battery_kwh} kWh battery · heat
-        pump · EV
-      </div>
-      <div className="muted tiny" style={{ marginTop: 2 }}>
-        as of {String(DEMO_NOW_HOUR).padStart(2, "0")}:00
+        pump
       </div>
 
       <div className="metric-grid" style={{ marginTop: 18 }}>
@@ -75,7 +71,7 @@ export function Home({
         </div>
       </div>
 
-      <div className="section-title">Reminders for you</div>
+      <div className="section-title">Reminders</div>
       <div className="stack">
         {home.reminders.map((r) => {
           const Icon = ICONS[r.icon];

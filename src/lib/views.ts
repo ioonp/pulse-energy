@@ -19,7 +19,7 @@ import {
   type Recommendation,
 } from "./engine";
 import { DEMO_TODAY } from "./demo";
-import { eur, signedEur } from "./format";
+import { eur } from "./format";
 import {
   getDashboardInsightCards,
   getTimeseriesSummary,
@@ -92,7 +92,7 @@ export function buildHome(ds: Dataset): HomeView {
       id: "report-savings",
       label: "Money saved",
       value: eur(thisWeek.savedEur), // €X.XX
-      changeText: `${signedEur(savedDelta)} vs last week`,
+      changeText: `${eur(Math.abs(savedDelta))} vs last week`,
       changeUp: savedDelta >= 0,
       changeGood: savedDelta >= 0, // saving more is good
     },
@@ -110,9 +110,7 @@ export function buildHome(ds: Dataset): HomeView {
       id: "report-selfsuf",
       label: "Self-sufficiency",
       value: `${thisWeek.selfSuffPct}%`, // % integer
-      changeText: `${selfDelta >= 0 ? "up" : "down"} ${Math.abs(
-        selfDelta,
-      )} pts vs last week`,
+      changeText: `${Math.abs(selfDelta)} pts vs last week`,
       changeUp: selfDelta >= 0,
       changeGood: selfDelta >= 0, // more self-sufficient is good
     },
