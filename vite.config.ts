@@ -7,7 +7,14 @@ export default defineConfig({
     host: true,
     port: Number(process.env.PORT) || 5173,
     strictPort: false,
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+    },
   },
+
   preview: {
     allowedHosts: ["enpal-pulse.onrender.com"],
   },
