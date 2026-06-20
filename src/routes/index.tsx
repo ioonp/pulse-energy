@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowRight, Battery, FileText, MessageCircle, Sun, TrendingDown, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, FileText, MessageCircle } from "lucide-react";
 import { z } from "zod";
 
 import { AppShell, useActiveHouseholdId } from "@/components/AppShell";
+import { EnergyFlow } from "@/components/EnergyFlow";
 import { getHouseholdSummaryFn } from "@/lib/data-functions";
 import { DEFAULT_HOUSEHOLD_ID } from "@/lib/demo-config";
 
