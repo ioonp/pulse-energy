@@ -56,6 +56,33 @@ body {
 }
 
 /* ---- app shell ---- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: calc(env(safe-area-inset-top) + 10px) 16px 10px;
+  background: rgba(246, 247, 249, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+.app-header-logo {
+  display: block;
+  width: 74px;
+  height: 37px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+}
+.app-header-title {
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
 .screen {
   padding: 16px 16px calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px);
 }
