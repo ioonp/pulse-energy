@@ -45,6 +45,14 @@ export function App() {
 
   return (
     <>
+      <header className="app-header" aria-label="Enpal Pulse header">
+        <img
+          className="app-header-logo"
+          src="https://www.deutschlandcard.de/.imaging/modern_large/dam/customer-website/partner/online-partner/enpal/Enpal_logo_300x150.png/jcr:content.webp?tt=20250821110340"
+          alt="Enpal logo"
+        />
+        <span className="app-header-title">Enpal Pulse</span>
+      </header>
       {tab === "home" && <Home ds={ds} onOpenReport={openReport} onGoAssistant={() => setTab("assistant")} />}
       {tab === "routines" && <Routines ds={ds} />}
       {tab === "assistant" && <Assistant ds={ds} onGoRoutines={() => setTab("routines")} />}
