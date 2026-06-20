@@ -3,7 +3,8 @@ import { useChat } from "@ai-sdk/react";
 import { Check, RefreshCw, Send, Sparkles, WifiOff, Wrench } from "lucide-react";
 import type { Dataset } from "../lib/data";
 import { answer, STARTERS, type AssistantReply } from "../lib/assistant";
-import { seedRoutine, useRoutines } from "../store/routines";
+import { useGoals } from "../store/goals";
+import type { ActionId } from "../lib/engine";
 import { ToolRenderer } from "../components/chat/ToolRenderer";
 import { Markdown } from "../components/chat/Markdown";
 
@@ -24,14 +25,14 @@ type FallbackMsg =
 /* ── Component ── */
 export function Assistant({
   ds,
-  onGoRoutines,
+  onGoGoals,
 }: {
   ds: Dataset;
-  onGoRoutines: () => void;
+  onGoGoals: () => void;
 }) {
   const [householdId, setHouseholdId] = useState("HH-1001");
   const [useFallback, setUseFallback] = useState(false);
-  const { addRoutine, hasRoutine } = useRoutines();
+  const { setDone, isDone } = useGoals();
   const endRef = useRef<HTMLDivElement>(null);
 
   /* ── AI SDK chat (online mode) ── */
@@ -79,10 +80,9 @@ export function Assistant({
     scrollToBottom();
   }, [messages, fallbackMsgs, isLoading, scrollToBottom]);
 
-  /* ── Routine helper (fallback mode) ── */
-  function setRoutine(id: string) {
-    const r = seedRoutine(id);
-    if (r) addRoutine(r);
+  /* ── Goal helper (fallback mode) ── */
+  function activateGoal(id: ActionId) {
+    setDone(id, true);
   }
 
   /* ── Handle MissingInfoForm submission ── */
@@ -167,21 +167,21 @@ export function Assistant({
                   </div>
                   <div className="bubble">
                     <Markdown text={m.reply.text} />
-                    {m.reply.routineId && (
+                    {m.reply.actionId && (
                       <div style={{ marginTop: 12 }}>
-                        {hasRoutine(m.reply.routineId) ? (
+                        {isDone(m.reply.actionId) ? (
                           <button
                             className="btn btn-set is-set"
-                            onClick={onGoRoutines}
+                            onClick={onGoGoals}
                           >
-                            <Check size={15} /> Routine set — view it
+                            <Check size={15} /> Goal activated — view it
                           </button>
                         ) : (
                           <button
                             className="btn btn-accent"
-                            onClick={() => setRoutine(m.reply.routineId!)}
+                            onClick={() => activateGoal(m.reply.actionId!)}
                           >
-                            Set this routine
+                            Activate this goal
                           </button>
                         )}
                       </div>

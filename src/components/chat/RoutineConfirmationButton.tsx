@@ -1,33 +1,25 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { seedRoutine, useRoutines } from "../../store/routines";
+import { useGoals } from "../../store/goals";
+import type { ActionId } from "../../lib/engine";
 
 type Props = { data: any };
 
+function mapRoutineId(id: string): ActionId {
+  if (id === "ev-on-solar" || id === "ev_solar_charge") return "ev_solar_charge";
+  if (id === "preheat-cheap" || id === "preheat_cheap_window") return "preheat_cheap_window";
+  return "appliances_midday"; // default fallback action
+}
+
 export function RoutineConfirmationButton({ data }: Props) {
   const d = data ?? {};
-  const { addRoutine, hasRoutine } = useRoutines();
-  const routineId: string = d.routine_id ?? "";
-  const alreadySet = hasRoutine(routineId);
+  const { isDone, setDone } = useGoals();
+  const goalId = mapRoutineId(d.routine_id ?? "");
+  const alreadySet = isDone(goalId);
   const [confirmed, setConfirmed] = useState(false);
 
   function handleConfirm() {
-    const seed = seedRoutine(routineId);
-    if (seed) {
-      addRoutine(seed);
-    } else {
-      // Build a custom routine from the tool result
-      addRoutine({
-        id: routineId || `custom-${Date.now()}`,
-        title: d.action_name ?? "Custom routine",
-        body: d.description ?? d.action_name ?? "",
-        icon: "appliances" as const,
-        load: "house_load_kw" as const,
-        window: [11, 15],
-        streak: ["missed", "missed", "missed", "missed", "missed", "missed", "missed"],
-        saveEur: d.estimated_savings_eur ?? 0,
-      });
-    }
+    setDone(goalId, true);
     setConfirmed(true);
   }
 
@@ -43,11 +35,11 @@ export function RoutineConfirmationButton({ data }: Props) {
       <div style={{ marginTop: 12 }}>
         {isSet ? (
           <button className="btn btn-set is-set" disabled>
-            <Check size={15} /> Routine set
+            <Check size={15} /> Goal Activated
           </button>
         ) : (
           <button className="btn btn-accent" onClick={handleConfirm}>
-            Confirm & Set
+            Activate Goal
           </button>
         )}
       </div>
