@@ -16,6 +16,10 @@ import {
 } from "./engine";
 import { DEMO_TODAY } from "./demo";
 import { eur, signedEur } from "./format";
+import {
+  getDashboardInsightCards,
+  getTimeseriesSummary,
+} from "./dashboardMetrics";
 
 const STEP_H = 0.25;
 
@@ -142,6 +146,11 @@ export function buildInsights(ds: Dataset, bandDate = DEMO_TODAY): InsightsView 
   const ev = evPattern(ds.records);
   const evShift = evWaste(ds.records);
   const surplusYear = surplusSummary(ds.records);
+  const dashboardCards = getDashboardInsightCards({
+    monthlyBills: ds.bills,
+    contract: ds.tariff,
+    timeseriesSummary: getTimeseriesSummary(ds.records),
+  });
 
   const trend = ds.bills.map((b) => ({
     month: b.month.slice(5), // "MM"
@@ -150,56 +159,35 @@ export function buildInsights(ds: Dataset, bandDate = DEMO_TODAY): InsightsView 
     selfsuf: round(b.self_sufficiency_pct, 0),
   }));
 
-  const lastBill = ds.bills[ds.bills.length - 1];
-  const prevBill = ds.bills[ds.bills.length - 2];
-
   const reports: ReportView[] = [
     {
       id: "report-savings",
-      title: "Money saved",
-      big: `€${Math.round(evShift.savingPerMonthEur + 15)}/mo`,
-      changeText: "by using your own solar & battery first",
+      title: dashboardCards.billOpportunity.title,
+      big: dashboardCards.billOpportunity.big,
+      changeText: dashboardCards.billOpportunity.changeText,
       changeGood: true,
       chartKind: "bill",
-      note: `Your monthly bill tracks the seasons — €${Math.round(
-        Math.min(...ds.bills.map((b) => b.total_bill_eur)),
-      )} in spring, €${Math.round(
-        Math.max(...ds.bills.map((b) => b.total_bill_eur)),
-      )} at the summer peak. The single biggest lever left is your car: charging it on daytime solar instead of midnight grid would cut about €${evShift.savingPerMonthEur}/mo. → See the "Charge the car on sunshine" routine.`,
+      note: dashboardCards.billOpportunity.note,
     },
     {
       id: "report-export",
-      title: "Energy sent to grid",
-      big: `${surplusYear.exportedKwh.toFixed(0)} kWh`,
-      changeText: `earned only €${surplusYear.feedInEarned.toFixed(
-        0,
-      )} — worth €${surplusYear.valueIfSelfUsed.toFixed(0)} if self-used`,
+      title: dashboardCards.export.title,
+      big: dashboardCards.export.big,
+      changeText: dashboardCards.export.changeText,
       changeGood: false,
       chartKind: "export",
-      note: `You exported ${surplusYear.exportedKwh.toFixed(
-        0,
-      )} kWh of free solar this year and were paid €0.081/kWh for it — then bought power back at about €${surplusYear.avgImportPrice.toFixed(
-        2,
-      )}/kWh, roughly ${Math.round(
-        surplusYear.avgImportPrice / 0.081,
-      )}× as much. Red bars = months you gave away the most. → Shift flexible loads into the midday surplus.`,
+      note: dashboardCards.export.note,
     },
     {
       id: "report-selfsuf",
-      title: "Self-sufficiency",
-      big: `${lastBill.self_sufficiency_pct.toFixed(0)}%`,
-      changeText: `${
-        lastBill.self_sufficiency_pct >= prevBill.self_sufficiency_pct
-          ? "up"
-          : "down"
-      } from ${prevBill.self_sufficiency_pct.toFixed(0)}% last month`,
-      changeGood: lastBill.self_sufficiency_pct >= prevBill.self_sufficiency_pct,
+      title: dashboardCards.selfSufficiency.title,
+      big: dashboardCards.selfSufficiency.big,
+      changeText: dashboardCards.selfSufficiency.changeText,
+      changeGood:
+        (dashboardCards.selfSufficiency.latestPct ?? 0) >=
+        (dashboardCards.selfSufficiency.previousPct ?? 0),
       chartKind: "selfsuf",
-      note: `Self-sufficiency is the share of your energy that came from your own solar and battery. It peaks in spring (${Math.max(
-        ...ds.bills.map((b) => b.self_sufficiency_pct),
-      ).toFixed(
-        0,
-      )}%) and dips in dark winter months. Charging the car on solar would push it higher. → Pre-heating in cheap hours helps too.`,
+      note: dashboardCards.selfSufficiency.note,
     },
   ];
 
