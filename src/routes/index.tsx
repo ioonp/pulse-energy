@@ -162,38 +162,28 @@ function HomePage() {
   );
 }
 
-function Stat({
-  icon,
+function Chip({
   label,
   value,
-  unit,
-  accent,
+  tone = "default",
 }: {
-  icon: React.ReactNode;
   label: string;
   value: string;
-  unit: string;
-  accent: string;
+  tone?: "default" | "grass" | "cta" | "stone";
 }) {
+  const valueColor =
+    tone === "grass"
+      ? "text-grass"
+      : tone === "cta"
+        ? "text-navy"
+        : tone === "stone"
+          ? "text-stone"
+          : "text-navy";
+  const bg = tone === "cta" ? "bg-cta/20" : "bg-white";
   return (
-    <div>
-      <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/60">
-        <span className={accent}>{icon}</span>
-        {label}
-      </div>
-      <div className="mt-2 flex items-baseline gap-1.5">
-        <span className={`font-display text-4xl md:text-5xl ${accent}`}>{value}</span>
-        <span className="text-white/60 text-base font-semibold">{unit}</span>
-      </div>
-    </div>
-  );
-}
-
-function Mini({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="text-white/80">
-      <span className="text-white/50">{label}: </span>
-      <span className="font-semibold text-white">{value}</span>
+    <div className={`card-soft px-4 py-3 ${bg}`}>
+      <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-stone">{label}</div>
+      <div className={`mt-1 font-display text-lg ${valueColor}`}>{value}</div>
     </div>
   );
 }
