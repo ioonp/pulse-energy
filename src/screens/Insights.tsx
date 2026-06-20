@@ -59,9 +59,15 @@ export function Insights({
 
   const bestLine =
     iv.best && iv.worst
-      ? `Best window today is ${hourLabel(iv.best.start)}–${hourLabel(
-          iv.best.end,
-        )}; avoid ${hourLabel(iv.worst.start)}–${hourLabel(iv.worst.end)}.`
+      ? bandDate === DEMO_WINTER
+        ? `Best flexible-use window: ${hourLabel(iv.best.start)}–${hourLabel(
+            iv.best.end,
+          )} when solar is available. Avoid high-price evening and low-solar night hours, especially ${hourLabel(
+            iv.worst.start,
+          )}–${hourLabel(iv.worst.end)}.`
+        : `Best flexible-use window: around midday, especially near ${hourLabel(
+            13,
+          )}. Avoid high-price evening and low-solar night hours.`
       : "Use power while the panels are producing.";
 
   return (
