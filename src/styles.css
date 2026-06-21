@@ -80,12 +80,6 @@ body {
   padding: 4px 8px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
 }
-.app-header-title {
-  color: var(--ink);
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
 .screen {
   padding: 16px 16px calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px);
 }
