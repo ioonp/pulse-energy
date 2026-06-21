@@ -10,7 +10,7 @@ Your cheapest energy is almost always your own — the solar your panels make an
 
 ## The four screens
 
-Pulse has four tabs along the bottom: Home · Insights · Assistant · Goals. Here's what each is for.
+Pulse has four tabs along the bottom: Home · Assistant · Consumptions · Recommandation. Here's what each is for.
 
 ### Home — your day at a glance
 
@@ -21,10 +21,10 @@ This is where you land. It answers one question: is my home doing well today?
   - **Money saved** — how much you've saved this week by using your own solar and battery instead of buying everything from the grid.
   - **Energy sent to grid** — surplus solar you exported. Selling it back earns only a few cents per kWh, so a high number here is a sign there's power you could be using yourself.
   - **Self-sufficiency** — the share of your energy that came from your own solar and battery rather than the grid.
-- Each tile shows how it changed versus last week. Tap the expand icon (top-right of a tile) to open its full breakdown in Insights.
-- **Reminders for you** — a couple of timely nudges, like "charge the car at midday, not midnight," each already showing its "＋€X today" impact. Each has a Set reminder button. Setting one adds it to your goals (more on that below).
+- Each tile shows how it changed versus last week. Tap the expand icon (top-right of a tile) to open its full breakdown in Consumptions.
+- **Reminders for you** — a couple of timely nudges, like "charge the car at midday, not midnight," each already showing its "＋€X today" impact. Each has a Set reminder button. Setting one adds it to your recommendations (more on that below).
 
-### Insights — the why behind the numbers
+### Consumptions — the why behind the numbers
 
 When you want to understand why your home performs the way it does, this is the screen.
 
@@ -45,11 +45,11 @@ A chat that knows your home's energy. Ask it questions the way you'd ask a knowl
 - "How much am I giving away to the grid?"
 - "Is my tariff still a good deal?"
 
-It answers using your actual data, in plain words — and when it suggests something useful, you can add that suggestion straight to your goals with one tap. If you're not sure what to ask, tap one of the suggested questions to get started.
+It answers using your actual data, in plain words — and when it suggests something useful, you can add that suggestion straight to your recommendations with one tap. If you're not sure what to ask, tap one of the suggested questions to get started.
 
-### Goals — recommendations and their impact
+### Recommandation — recommendations and their impact
 
-Goals turns Pulse's recommendations into a running savings tally. Every suggestion leads with its impact — money first, CO₂ second — so you always know what's worth doing.
+Recommandation turns Pulse's recommendations into a running savings tally. Every suggestion leads with its impact — money first, CO₂ second — so you always know what's worth doing.
 
 - At the top, a **running total** shows what you've saved this month and how it compares to what's possible, with a progress bar and the CO₂ you've avoided (expressed as "km not driven").
 - **Today's actions** are ranked by impact, biggest euro first. Each shows a one-line suggestion, a green "＋€X today" money tag, a CO₂ tag, and a **Mark done** button. Tap done when you act (or let Pulse detect it from your meter) and the total and bar move up.
@@ -60,11 +60,11 @@ Goals turns Pulse's recommendations into a running savings tally. Every suggesti
 The four screens aren't separate tools — they form a loop that helps you actually change something, not just look at charts:
 
 1. **Notice** — Home shows how you're doing and flags a timely nudge with its euro impact.
-2. **Understand** — tap through to Insights to see why (the colored day strip and the trends), or ask the Assistant.
-3. **Commit** — hit Set reminder on a nudge (or Add to my goals in the Assistant) to act on a recommendation.
-4. **Improve** — Goals tallies what you save, scored from your meter, and shows the running total climbing.
+2. **Understand** — tap through to Consumptions to see why (the colored day strip and the trends), or ask the Assistant.
+3. **Commit** — hit Set reminder on a nudge (or Add to my recommendations in the Assistant) to act on a recommendation.
+4. **Improve** — Recommandation tallies what you save, scored from your meter, and shows the running total climbing.
 
-A typical week: you glance at Home most days. When a number surprises you, you open Insights or the Assistant to find out why. Once or twice you act on a nudge. Then you check Goals now and then to see your savings adding up.
+A typical week: you glance at Home most days. When a number surprises you, you open Consumptions or the Assistant to find out why. Once or twice you act on a nudge. Then you check Recommandation now and then to see your savings adding up.
 
 ## A few things worth knowing
 
