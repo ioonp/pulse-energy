@@ -41,13 +41,7 @@ export function ActionCard({ r }: { r: Recommendation }) {
           onClick={() => toggleRemind(r.id)}
           aria-pressed={reminded}
         >
-          {reminded ? (
-            <>
-              <Check size={15} /> Reminder on
-            </>
-          ) : (
-            "Set reminder"
-          )}
+          {reminded ? "Reminder on" : "Set reminder"}
         </button>
         <button
           className={`done-check ${done ? "is-done" : ""}`}
