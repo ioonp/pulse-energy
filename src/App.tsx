@@ -98,7 +98,6 @@ export function App() {
           src={LOGO_SRC}
           alt="Enpal logo"
         />
-        <span className="app-header-title">Enpal Pulse</span>
         <ProfileMenu ds={ds} onLogout={logout} />
       </header>
       {tab === "home" && <Home ds={ds} onOpenReport={openReport} />}
